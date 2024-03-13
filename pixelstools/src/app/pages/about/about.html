@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="previousMap()" class="floating-button">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <div class="floating-input">
+      <ion-item>
+        <ion-input [(ngModel)]="mapNumber" type="text" placeholder="Número del mapa"></ion-input>
+        <ion-button (click)="loadMap()" class="floating-button">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="nextMap()" class="floating-button">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="width: 100%; height: 100%;">
+    <iframe [src]="mapUrl" width="100%" height="30%" frameborder="0"></iframe>
+    <iframe [src]="gameUrl" allow-same-origin="true" sandbox="allow-same-origin allow-scripts" width="100%" height="70%" frameborder="0"></iframe>
+  </div>
+</ion-content>

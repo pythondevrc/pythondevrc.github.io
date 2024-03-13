@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-list-header>
+      <h1>Tiempos de Foresting</h1>
+    </ion-list-header>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen="true">
+  <ion-list #forestimeList>
+    <ion-item-group *ngFor="let land of lands">
+      <ion-item-divider sticky>
+        <ion-label>
+          Land: {{land.numero}}
+        </ion-label>
+      </ion-item-divider>
+      <ion-item-sliding *ngFor="let forest of land.felling">
+        <ion-item>
+          <ion-label>
+              Ve a talar en {{ formatDate(forest) }}
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button (click)="eliminarTiempoTala(land.numero, forest)" class="floating-button">
+              <ion-icon style="color: red;" name="close-circle"></ion-icon>
+            </ion-button>
+            <ion-button (click)="actualizarTiempoTala(land.numero, forest)" class="floating-button">
+              <ion-icon style="color: green;" name="checkmark-circle"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

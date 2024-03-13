@@ -1,0 +1,7 @@
+{
+  "name": "pixelstools",
+  "type": "angular",
+  "integrations": {
+    "capacitor": {}
+  }
+}
