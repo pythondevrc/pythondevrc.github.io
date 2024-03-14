@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TabsPage } from './tabs-page';
 import { TabsPageRoutingModule } from './tabs-page-routing.module';
 
-import { AboutModule } from '../about/about.module';
+import { AboutModule } from '../foresting/foresting.module';
 import { MapModule } from '../map/map.module';
 
 @NgModule({

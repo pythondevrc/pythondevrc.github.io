@@ -9,17 +9,11 @@ import { DataLandService } from '../../providers/land-data';
 })
 export class MapPage implements OnInit, AfterViewInit {
   lands: any;
-  mapNumber1: number = 1340;
-  mapNumber2: number = 3443;
-  mapNumber3: number = 3908;
-  mapNumber4: number = 4434;
-  selectedMaps: string = '1';
-  changeMaps: string = '1';
+  mapNumbers: number[] = [1340, 3443, 3908, 4434];
+  selectedMaps: number = 1;
+  changeMaps: number = 1;
   intervalMaps: any;
-  mapUrl1: SafeResourceUrl;
-  mapUrl2: SafeResourceUrl;
-  mapUrl3: SafeResourceUrl;
-  mapUrl4: SafeResourceUrl;
+  mapUrls: SafeResourceUrl[] = [];
 
   constructor(private sanitizer: DomSanitizer,
     private datalandService: DataLandService) {}
@@ -30,172 +24,71 @@ export class MapPage implements OnInit, AfterViewInit {
     });
   }
 
-  loadMap1() {
-    const url1 = `https://play.pixels.xyz/pixels/share/${this.mapNumber1}`;
-    this.mapUrl1 = this.sanitizer.bypassSecurityTrustResourceUrl(url1);
-  }
-
-  loadMap2() {
-    const url2 = `https://play.pixels.xyz/pixels/share/${this.mapNumber2}`;
-    this.mapUrl2 = this.sanitizer.bypassSecurityTrustResourceUrl(url2);
-  }
-
-  loadMap3() {
-    const url3 = `https://play.pixels.xyz/pixels/share/${this.mapNumber3}`;
-    this.mapUrl3 = this.sanitizer.bypassSecurityTrustResourceUrl(url3);
-  }
-
-  loadMap4() {
-    const url4 = `https://play.pixels.xyz/pixels/share/${this.mapNumber4}`;
-    this.mapUrl4 = this.sanitizer.bypassSecurityTrustResourceUrl(url4);
-  }
-
-  nextMap1() {
-    do {
-      this.mapNumber1++;
-    } while (this.mapNumber1 <= 5000 && !this.isMapValid(this.mapNumber1));
-
-    if (this.mapNumber1 <= 5000) {
-      this.loadMap1();
-    } else {
-      this.mapNumber1 = 1;
-      this.loadMap1();
+  loadMaps() {
+    for (let i = 0; i < this.selectedMaps; i++) {
+      const url = `https://play.pixels.xyz/pixels/share/${this.mapNumbers[i]}`;
+      this.mapUrls[i] = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
   }
 
-  nextMap2() {
-    do {
-      this.mapNumber2++;
-    } while (this.mapNumber2 <= 5000 && !this.isMapValid(this.mapNumber2));
+  changeAllMaps() {
+    clearInterval(this.intervalMaps);
+    let timeInterval = 0;
+    switch (this.changeMaps) {
+      case 2:
+        timeInterval = 5000;
+        break;
+      case 3:
+        timeInterval = 10000;
+        break;
+      case 4:
+        timeInterval = 15000;
+        break;
+      case 5:
+        timeInterval = 20000;
+        break;
+    }
+    this.intervalMaps = setInterval(() => {
+      for (let i = 0; i < this.selectedMaps; i++) {
+        this.nextMap(i);
+      }
+    }, timeInterval);
+  }
 
-    if (this.mapNumber2 <= 5000) {
-      this.loadMap2();
+  nextMap(index: number) {
+    do {
+      this.mapNumbers[index]++;
+    } while (this.mapNumbers[index] <= 5000 && !this.isMapValid(this.mapNumbers[index]));
+
+    if (this.mapNumbers[index] <= 5000) {
+      this.loadMap(index);
     } else {
-      this.mapNumber2 = 1;
-      this.loadMap2();
+      this.mapNumbers[index] = 1;
+      this.loadMap(index);
     }
   }
 
-  nextMap3() {
-    do {
-      this.mapNumber3++;
-    } while (this.mapNumber3 <= 5000 && !this.isMapValid(this.mapNumber3));
-
-    if (this.mapNumber3 <= 5000) {
-      this.loadMap3();
-    } else {
-      this.mapNumber3 = 1;
-      this.loadMap3();
-    }
+  loadMap(index: number) {
+    const url = `https://play.pixels.xyz/pixels/share/${this.mapNumbers[index]}`;
+    this.mapUrls[index] = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  nextMap4() {
+  previousMap(index: number) {
     do {
-      this.mapNumber4++;
-    } while (this.mapNumber4 <= 5000 && !this.isMapValid(this.mapNumber4));
+      this.mapNumbers[index]--;
+    } while (this.mapNumbers[index] >= 1 && !this.isMapValid(this.mapNumbers[index]));
 
-    if (this.mapNumber4 <= 5000) {
-      this.loadMap4();
+    if (this.mapNumbers[index] >= 1) {
+      this.loadMap(index);
     } else {
-      this.mapNumber4 = 1;
-      this.loadMap4();
-    }
-  }
-
-  previousMap1() {
-    do {
-      this.mapNumber1--;
-    } while (this.mapNumber1 >= 1 && !this.isMapValid(this.mapNumber1));
-
-    if (this.mapNumber1 >= 1) {
-      this.loadMap1();
-    } else {
-      this.mapNumber1 = 5000;
-      this.loadMap1();
-    }
-  }
-
-  previousMap2() {
-    do {
-      this.mapNumber2--;
-    } while (this.mapNumber2 >= 1 && !this.isMapValid(this.mapNumber2));
-
-    if (this.mapNumber2 >= 1) {
-      this.loadMap2();
-    } else {
-      this.mapNumber2 = 5000;
-      this.loadMap2();
-    }
-  }
-
-  previousMap3() {
-    do {
-      this.mapNumber3--;
-    } while (this.mapNumber3 >= 1 && !this.isMapValid(this.mapNumber3));
-
-    if (this.mapNumber3 >= 1) {
-      this.loadMap3();
-    } else {
-      this.mapNumber3 = 5000;
-      this.loadMap3();
-    }
-  }
-
-  previousMap4() {
-    do {
-      this.mapNumber4--;
-    } while (this.mapNumber4 >= 1 && !this.isMapValid(this.mapNumber4));
-
-    if (this.mapNumber4 >= 1) {
-      this.loadMap4();
-    } else {
-      this.mapNumber4 = 5000;
-      this.loadMap4();
+      this.mapNumbers[index] = 5000;
+      this.loadMap(index);
     }
   }
 
   isMapValid(mapNumber: number): boolean {
     const mapInfo = this.lands.find(land => land.numero === mapNumber);
     return mapInfo && mapInfo.foresting === true;
-  }
-
-  loadAllMap(){
-    this.loadMap1();
-    if (this.selectedMaps === '2') {
-      this.loadMap2();
-    }
-    if (this.selectedMaps === '4') {
-      this.loadMap2();
-      this.loadMap3();
-      this.loadMap4();
-    }
-  }
-
-  changeAllMap(){
-    clearInterval(this.intervalMaps);
-    let timeinterval = 0;
-    if (this.changeMaps === '1') {
-      return
-    } else if (this.changeMaps === '2') {
-      timeinterval = 5000;
-    } else if (this.changeMaps === '3') {
-      timeinterval = 10000;
-    } else if (this.changeMaps === '4') {
-      timeinterval = 15000;
-    } else if (this.changeMaps === '5') {
-      timeinterval = 20000;
-    }
-    this.intervalMaps = setInterval(() => {
-      this.nextMap1();
-      if (this.selectedMaps === '2') {
-        this.nextMap2();
-      }
-      if (this.selectedMaps === '4') {
-        this.nextMap2();
-        this.nextMap3();
-        this.nextMap4();
-      }
-    }, timeinterval);
   }
 
   agregarTala(itemNumero: number) {
@@ -214,7 +107,7 @@ export class MapPage implements OnInit, AfterViewInit {
     );
   }
 
-  async ngAfterViewInit(){
-    this.loadAllMap();
+  ngAfterViewInit(){
+    this.loadMaps();
   }
 }

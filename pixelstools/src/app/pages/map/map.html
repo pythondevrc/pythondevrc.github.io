@@ -1,16 +1,15 @@
-
 <ion-header>
   <ion-toolbar>
     <div class="floating-input">
       <ion-item>
         <ion-label style="color: black;">Modo:</ion-label>
-        <ion-select [(ngModel)]="selectedMaps" (ionChange)="loadAllMap()">
+        <ion-select [(ngModel)]="selectedMaps" (ionChange)="loadMaps()">
           <ion-select-option value="1">1 Mapa</ion-select-option>
           <ion-select-option value="2">2 Mapas</ion-select-option>
           <ion-select-option value="4">4 Mapas</ion-select-option>
         </ion-select>
         <ion-label style="color: black;">Velocidad:</ion-label>
-        <ion-select [(ngModel)]="changeMaps" (ionChange)="changeAllMap()">
+        <ion-select [(ngModel)]="changeMaps" (ionChange)="changeAllMaps()">
           <ion-select-option value="1">Manual</ion-select-option>
           <ion-select-option value="2">5 Segundos</ion-select-option>
           <ion-select-option value="3">10 Segundos</ion-select-option>
@@ -23,208 +22,34 @@
 </ion-header>
 <ion-content>
   <div style="width: 100%; height: 6%;"></div>
-  <div *ngIf="selectedMaps == '1'" style="width: 100%; height: 94%;">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button (click)="previousMap1()" class="floating-button">
-            <ion-icon name="arrow-back"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <div class="floating-input">
-          <ion-item>
-            <ion-button (click)="agregarTala(mapNumber1)" class="floating-button">
-              <ion-icon name="hammer"></ion-icon>
-            </ion-button>
-            <ion-input [(ngModel)]="mapNumber1" type="text" placeholder="Número del mapa"></ion-input>
-            <ion-button (click)="loadMap1()" class="floating-button">
-              <ion-icon name="search"></ion-icon>
-            </ion-button>
-          </ion-item>
-        </div>
-        <ion-buttons slot="end">
-          <ion-button (click)="nextMap1()" class="floating-button">
-            <ion-icon name="arrow-forward"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <iframe [src]="mapUrl1" width="100%" height="100%" frameborder="0"></iframe>
-  </div>
-  <div *ngIf="selectedMaps == '2'" style="width: 100%; height: 94%;">
-    <div style="width: 100%; height: 50%;">
+  <div class="grid-container" style="width: 100%; height: 94%;">
+    <div *ngFor="let mapUrl of mapUrls" class="mapcontainer-{{mapUrls.length}}">
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="previousMap1()" class="floating-button">
+            <ion-button (click)="previousMap(mapUrls.indexOf(mapUrl))" class="floating-button">
               <ion-icon name="arrow-back"></ion-icon>
             </ion-button>
           </ion-buttons>
           <div class="floating-input">
             <ion-item>
-              <ion-button (click)="agregarTala(mapNumber1)" class="floating-button">
+              <ion-button (click)="agregarTala(mapNumbers[mapUrls.indexOf(mapUrl)])" class="floating-button">
                 <ion-icon name="hammer"></ion-icon>
               </ion-button>
-              <ion-input [(ngModel)]="mapNumber1" type="text" placeholder="Número del mapa"></ion-input>
-              <ion-button (click)="loadMap1()" class="floating-button">
+              <ion-input [(ngModel)]="mapNumbers[mapUrls.indexOf(mapUrl)]" type="text" placeholder="Número del mapa"></ion-input>
+              <ion-button (click)="loadMap(mapUrls.indexOf(mapUrl))" class="floating-button">
                 <ion-icon name="search"></ion-icon>
               </ion-button>
             </ion-item>
           </div>
           <ion-buttons slot="end">
-            <ion-button (click)="nextMap1()" class="floating-button">
+            <ion-button (click)="nextMap(mapUrls.indexOf(mapUrl))" class="floating-button">
               <ion-icon name="arrow-forward"></ion-icon>
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <iframe [src]="mapUrl1" width="100%" height="100%" frameborder="0"></iframe>
-    </div>
-    <div style="width: 100%; height: 50%;">
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="previousMap2()" class="floating-button">
-              <ion-icon name="arrow-back"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-          <div class="floating-input">
-            <ion-item>
-              <ion-button (click)="agregarTala(mapNumber2)" class="floating-button">
-                <ion-icon name="hammer"></ion-icon>
-              </ion-button>
-              <ion-input [(ngModel)]="mapNumber2" type="text" placeholder="Número del mapa"></ion-input>
-              <ion-button (click)="loadMap2()" class="floating-button">
-                <ion-icon name="search"></ion-icon>
-              </ion-button>
-            </ion-item>
-          </div>
-          <ion-buttons slot="end">
-            <ion-button (click)="nextMap2()" class="floating-button">
-              <ion-icon name="arrow-forward"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <iframe [src]="mapUrl2" width="100%" height="100%" frameborder="0"></iframe>
-    </div>
-  </div>
-  <div *ngIf="selectedMaps == '4'" style="width: 100%; height: 94%;">
-    <div style="width: 100%; height: 50%; display: flex;">
-      <div style="width: 50%; height: 100%;">
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="previousMap1()" class="floating-button">
-                <ion-icon name="arrow-back"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-            <div class="floating-input">
-              <ion-item>
-                <ion-button (click)="agregarTala(mapNumber1)" class="floating-button">
-                  <ion-icon name="hammer"></ion-icon>
-                </ion-button>
-                <ion-input [(ngModel)]="mapNumber1" type="text" placeholder="Número del mapa"></ion-input>
-                <ion-button (click)="loadMap1()" class="floating-button">
-                  <ion-icon name="search"></ion-icon>
-                </ion-button>
-              </ion-item>
-            </div>
-            <ion-buttons slot="end">
-              <ion-button (click)="nextMap1()" class="floating-button">
-                <ion-icon name="arrow-forward"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <iframe [src]="mapUrl1" width="100%" height="100%" frameborder="0"></iframe>
-      </div>
-      <div style="width: 50%; height: 100%;">
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="previousMap2()" class="floating-button">
-                <ion-icon name="arrow-back"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-            <div class="floating-input">
-              <ion-item>
-                <ion-button (click)="agregarTala(mapNumber2)" class="floating-button">
-                  <ion-icon name="hammer"></ion-icon>
-                </ion-button>
-                <ion-input [(ngModel)]="mapNumber2" type="text" placeholder="Número del mapa"></ion-input>
-                <ion-button (click)="loadMap2()" class="floating-button">
-                  <ion-icon name="search"></ion-icon>
-                </ion-button>
-              </ion-item>
-            </div>
-            <ion-buttons slot="end">
-              <ion-button (click)="nextMap2()" class="floating-button">
-                <ion-icon name="arrow-forward"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <iframe [src]="mapUrl2" width="100%" height="100%" frameborder="0"></iframe>
-      </div>
-    </div>
-    <div style="width: 100%; height: 50%; display: flex;">
-      <div style="width: 50%; height: 100%;">
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="previousMap3()" class="floating-button">
-                <ion-icon name="arrow-back"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-            <div class="floating-input">
-              <ion-item>
-                <ion-button (click)="agregarTala(mapNumber3)" class="floating-button">
-                  <ion-icon name="hammer"></ion-icon>
-                </ion-button>
-                <ion-input [(ngModel)]="mapNumber3" type="text" placeholder="Número del mapa"></ion-input>
-                <ion-button (click)="loadMap3()" class="floating-button">
-                  <ion-icon name="search"></ion-icon>
-                </ion-button>
-              </ion-item>
-            </div>
-            <ion-buttons slot="end">
-              <ion-button (click)="nextMap3()" class="floating-button">
-                <ion-icon name="arrow-forward"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <iframe [src]="mapUrl3" width="100%" height="100%" frameborder="0"></iframe>
-      </div>
-      <div style="width: 50%; height: 100%;">
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="previousMap4()" class="floating-button">
-                <ion-icon name="arrow-back"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-            <div class="floating-input">
-              <ion-item>
-                <ion-button (click)="agregarTala(mapNumber4)" class="floating-button">
-                  <ion-icon name="hammer"></ion-icon>
-                </ion-button>
-                <ion-input [(ngModel)]="mapNumber4" type="text" placeholder="Número del mapa"></ion-input>
-                <ion-button (click)="loadMap4()" class="floating-button">
-                  <ion-icon name="search"></ion-icon>
-                </ion-button>
-              </ion-item>
-            </div>
-            <ion-buttons slot="end">
-              <ion-button (click)="nextMap4()" class="floating-button">
-                <ion-icon name="arrow-forward"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <iframe [src]="mapUrl4" width="100%" height="100%" frameborder="0"></iframe>
-      </div>
+      <iframe [src]="mapUrl" width="100%" height="100%" frameborder="0"></iframe>
     </div>
   </div>
 </ion-content>

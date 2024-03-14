@@ -3,11 +3,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DataLandService } from '../../providers/land-data';
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html',
-  styleUrls: ['./about.scss']
+  selector: 'page-foresting',
+  templateUrl: 'foresting.html',
+  styleUrls: ['./foresting.scss']
 })
-export class AboutPage implements OnInit, AfterViewInit {
+export class ForestingPage implements OnInit, AfterViewInit {
   lands: any;
   mapNumber: number = 1;
   selectedMaps: string = '1';

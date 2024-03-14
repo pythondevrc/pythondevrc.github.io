@@ -1,28 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { checkTutorialGuard } from './providers/check-tutorial.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/map',
+    redirectTo: '/app/tabs/map',
     pathMatch: 'full'
   },
   {
-    path: 'map',
+    path: 'app/tabs/map',
     loadChildren: () => import('./pages/map/map.module').then(m => m.MapModule)
   },
   {
-    path: 'support',
-    loadChildren: () => import('./pages/support/support.module').then(m => m.SupportModule)
+    path: 'app/tabs/foresting',
+    loadChildren: () => import('./pages/foresting/foresting.module').then(m => m.ForestingModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
-  },
-  {
-    path: 'app',
-    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
+    path: 'app/tabs/forestime',
+    loadChildren: () => import('./pages/forestime/forestime.module').then(m => m.ForestimeModule)
   }
 ];
 

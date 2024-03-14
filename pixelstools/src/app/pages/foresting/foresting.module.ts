@@ -4,18 +4,18 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
 
-import { AboutPage } from './about';
+import { ForestingPage } from './foresting';
 import { PopoverPage } from '../about-popover/about-popover';
-import { AboutPageRoutingModule } from './about-routing.module';
+import { ForestingPageRoutingModule } from './foresting-routing.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        AboutPageRoutingModule
+        ForestingPageRoutingModule
     ],
-    declarations: [AboutPage, PopoverPage],
-    bootstrap: [AboutPage]
+    declarations: [ForestingPage, PopoverPage],
+    bootstrap: [ForestingPage]
 })
-export class AboutModule {}
+export class ForestingModule {}

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'map',
+        path: '/app/tabs/map',
         children: [
           {
             path: '',
@@ -18,16 +18,16 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'about',
+        path: '/app/tabs/about',
         children: [
           {
             path: '',
-            loadChildren: () => import('../about/about.module').then(m => m.AboutModule)
+            loadChildren: () => import('../foresting/foresting.module').then(m => m.AboutModule)
           }
         ]
       },
       {
-        path: 'forestime',
+        path: '/app/tabs/forestime',
         children: [
           {
             path: '',
