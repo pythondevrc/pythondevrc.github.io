@@ -25,6 +25,7 @@ export class MapPage implements OnInit, AfterViewInit {
   }
 
   loadMaps() {
+    if (!this.selectedMaps) this.selectedMaps = 1;
     for (let i = 0; i < this.selectedMaps; i++) {
       const url = `https://play.pixels.xyz/pixels/share/${this.mapNumbers[i]}`;
       this.mapUrls[i] = this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -35,6 +36,8 @@ export class MapPage implements OnInit, AfterViewInit {
     clearInterval(this.intervalMaps);
     let timeInterval = 0;
     switch (this.changeMaps) {
+      case 1:
+        return;
       case 2:
         timeInterval = 5000;
         break;

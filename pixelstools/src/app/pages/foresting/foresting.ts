@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { DataLandService } from '../../providers/land-data';
 
@@ -7,7 +7,7 @@ import { DataLandService } from '../../providers/land-data';
   templateUrl: 'foresting.html',
   styleUrls: ['./foresting.scss']
 })
-export class ForestingPage implements OnInit, AfterViewInit {
+export class ForestingPage implements OnInit {
   lands: any;
   mapNumber: number = 1;
   selectedMaps: string = '1';
@@ -20,7 +20,9 @@ export class ForestingPage implements OnInit, AfterViewInit {
   ngOnInit() {
     this.datalandService.obtenerDatos().subscribe(data => {
       this.lands = data;
+      this.loadMap(); // Cargar el mapa después de obtener los datos
     });
+    this.loadGame(); // Cargar el juego en el inicio
   }
 
   loadMap() {
@@ -68,10 +70,5 @@ export class ForestingPage implements OnInit, AfterViewInit {
   isMapValid(mapNumber: number): boolean {
     const mapInfo = this.lands.find(land => land.numero === mapNumber);
     return mapInfo && mapInfo.foresting === true;
-  }
-
-  async ngAfterViewInit(){
-    this.loadMap();
-    this.loadGame();
   }
 }
