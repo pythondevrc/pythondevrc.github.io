@@ -8,6 +8,9 @@
 
     <div class="floating-input">
       <ion-item>
+        <ion-button (click)="agregarTala()" class="floating-button">
+          <ion-icon name="hammer"></ion-icon>
+        </ion-button>
         <ion-input [(ngModel)]="mapNumber" type="number" placeholder="Número del mapa"></ion-input>
         <ion-button (click)="loadMap()" class="floating-button">
           <ion-icon name="search"></ion-icon>
@@ -25,10 +28,12 @@
 
 <ion-content>
   <ion-grid style="height: 100%;">
-    <ion-row style="height: 100%;">
+    <ion-row style="height: 40%;">
       <ion-col size="12">
         <iframe [src]="mapUrl" width="100%" height="100%" frameborder="0"></iframe>
       </ion-col>
+    </ion-row>
+    <ion-row style="height: 60%;">
       <ion-col size="12">
         <iframe [src]="gameUrl" allow-same-origin="true" sandbox="allow-same-origin allow-scripts" width="100%" height="100%" frameborder="0"></iframe>
       </ion-col>

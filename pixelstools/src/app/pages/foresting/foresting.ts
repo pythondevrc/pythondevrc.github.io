@@ -67,6 +67,22 @@ export class ForestingPage implements OnInit {
     }
   }
 
+  agregarTala() {
+    const fechaActual = new Date();
+    const tiempoEnMilisegundos = fechaActual.getTime();
+    const tiempoModificado = tiempoEnMilisegundos + (7.25 * 60 * 60 * 1000);
+    const formattedDate = `${tiempoModificado}`;
+
+    this.datalandService.agregarInformacionTala(this.mapNumber, formattedDate).subscribe(
+      (data) => {
+        console.log('Información de tala agregada correctamente', data);
+      },
+      (error) => {
+        console.error('Error al agregar información de tala', error);
+      }
+    );
+  }
+
   isMapValid(mapNumber: number): boolean {
     const mapInfo = this.lands.find(land => land.numero === mapNumber);
     return mapInfo && mapInfo.foresting === true;
