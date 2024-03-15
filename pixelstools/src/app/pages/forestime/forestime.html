@@ -19,7 +19,7 @@
       <ion-item-sliding *ngFor="let forest of land.felling">
         <ion-item>
           <ion-label>
-              Ve a talar en {{ formatDate(forest) }}
+              Talar {{ formatDate(forest) }}
           </ion-label>
           <ion-buttons slot="end">
             <ion-button (click)="eliminarTiempoTala(land.numero, forest)" class="floating-button">
