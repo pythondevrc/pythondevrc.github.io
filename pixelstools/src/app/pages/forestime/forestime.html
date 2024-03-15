@@ -23,10 +23,13 @@
           </ion-label>
           <ion-buttons slot="end">
             <ion-button (click)="eliminarTiempoTala(land.numero, forest)" class="floating-button">
-              <ion-icon style="color: red;" name="close-circle"></ion-icon>
+              <ion-icon size="large" style="color: red;" name="close-circle"></ion-icon>
+            </ion-button>
+            <ion-button (click)="recalcularTiempoTala(land.numero, forest)" class="floating-button">
+              <ion-icon size="large" style="color: blue;" name="refresh-circle"></ion-icon>
             </ion-button>
             <ion-button (click)="actualizarTiempoTala(land.numero, forest)" class="floating-button">
-              <ion-icon style="color: green;" name="checkmark-circle"></ion-icon>
+              <ion-icon size="large" style="color: green;" name="checkmark-circle"></ion-icon>
             </ion-button>
           </ion-buttons>
         </ion-item>

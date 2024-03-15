@@ -116,4 +116,32 @@ export class DataLandService {
       });
     });
   }
+
+  recalcularTiempoTala(itemNumero: number, fellingDate: string): Observable<any> {
+    return new Observable((observer) => {
+      this.obtenerDatos().subscribe((data: any) => {
+        const itemIndex = data.findIndex((item: any) => item.numero === itemNumero);
+
+        if (itemIndex !== -1) {
+          data[itemIndex].felling = data[itemIndex].felling || [];
+
+          // Actualizar el tiempo de tala a 7.25 horas más tarde
+          const fechaIndex = data[itemIndex].felling.indexOf(fellingDate);
+          if (fechaIndex !== -1) {
+            const fechaActual = new Date(parseInt(fellingDate));
+            const tiempoEnMilisegundos = fechaActual.getTime();
+            const tiempoModificado = tiempoEnMilisegundos + (7.25 * 60 * 60 * 1000);
+            data[itemIndex].felling[fechaIndex] = `${tiempoModificado}`;
+            this.guardarDatosEnLocalStorage(data);
+            observer.next(data);
+            observer.complete();
+          } else {
+            observer.error('Fecha de tala no encontrada');
+          }
+        } else {
+          observer.error('Elemento no encontrado');
+        }
+      });
+    });
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataLandService } from '../../providers/land-data';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'page-forestime',
@@ -10,7 +11,7 @@ import * as moment from 'moment';
 export class ForestimePage implements OnInit {
   lands: any[] = [];
 
-  constructor(private dataLandService: DataLandService) {
+  constructor(private dataLandService: DataLandService, public router: Router) {
     moment.locale('es');
   }
 
@@ -26,7 +27,6 @@ export class ForestimePage implements OnInit {
   obtenerItemsConFelling() {
     this.dataLandService.obtenerItemsConFelling().subscribe(
       (items) => {
-        console.log('Items con información de tala obtenidos correctamente', items);
         this.lands = items.sort((a, b) => {
           const fechaA = this.obtenerFechaMasTemprana(a.felling);
           const fechaB = this.obtenerFechaMasTemprana(b.felling);
@@ -51,6 +51,19 @@ export class ForestimePage implements OnInit {
     this.dataLandService.eliminarTiempoTala(landNumber, timestamp).subscribe(
       (data) => {
         console.log('Datos actualizados:', data);
+        this.obtenerItemsConFelling();
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  recalcularTiempoTala(landNumber:number, timestamp:string){
+    this.dataLandService.recalcularTiempoTala(landNumber, timestamp).subscribe(
+      (data) => {
+        console.log('Datos actualizados:', data);
+        this.obtenerItemsConFelling();
       },
       (error) => {
         console.error('Error:', error);
@@ -62,6 +75,7 @@ export class ForestimePage implements OnInit {
     this.dataLandService.actualizarTiempoTala(landNumber, timestamp).subscribe(
       (data) => {
         console.log('Datos actualizados:', data);
+        this.obtenerItemsConFelling();
       },
       (error) => {
         console.error('Error:', error);
