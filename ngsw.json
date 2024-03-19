@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1710515972603,
+  "timestamp": 1710851985807,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -67,11 +67,11 @@
         "/9958.bd3be0c13f049783.js",
         "/common.581595c103c24846.js",
         "/index.html",
-        "/main.35258c7a7349630d.js",
+        "/main.67e6ddd43bb56940.js",
         "/polyfills-core-js.48561d9ece42d4e7.js",
         "/polyfills-dom.3a5e3168052f1fc5.js",
         "/polyfills.6ad04e9c01e72dc3.js",
-        "/runtime.a7ee6e22e1ccb2a2.js",
+        "/runtime.172ae897049b8ca8.js",
         "/styles.22ce46f013c51b7f.css"
       ],
       "patterns": []
@@ -85,6 +85,7 @@
       },
       "urls": [
         "/assets/data/data.json",
+        "/assets/data/grafo.js",
         "/assets/data/landsdata.json",
         "/assets/img/about/Archive.zip",
         "/assets/img/about/austin.jpg",
@@ -173,7 +174,8 @@
     "/9922.8f9591d1a36b3bd1.js": "331d1ba8d72080c9cf563692cf75397932c8fe6d",
     "/9958.bd3be0c13f049783.js": "e7e20144517464d5f63905c0c15e635aeb1f2119",
     "/assets/data/data.json": "c257683ffc473c2df5eade814908ce5087734485",
-    "/assets/data/landsdata.json": "1a93a9074de45576b9000bf8f6b6332e1986e828",
+    "/assets/data/grafo.js": "c7bc10608c6d4a4b653079a72a67466b07032299",
+    "/assets/data/landsdata.json": "91b0aa693dd0213c037d801d6e401f260f9ab5cd",
     "/assets/img/about/Archive.zip": "278bba93e5885271a2e2ea9d11c14f1b41595e03",
     "/assets/img/about/austin.jpg": "c3641d77be97f9de734666ecd956efc5bf956dfc",
     "/assets/img/about/chicago.jpg": "b670b6540376cc32ed67d92da9becb2c737f71f7",
@@ -201,12 +203,12 @@
     "/assets/img/speakers/rabbit.jpg": "5286740d99c900d080da59c511865f495e8c6266",
     "/assets/img/speakers/turtle.jpg": "8bf240a802062bf0ee3c1b31ff12cd9158b5734e",
     "/common.581595c103c24846.js": "97c8249671d992a671679c5c5adca6d180a39938",
-    "/index.html": "197bc028a8918afa7597a56578e4ea37e2867ba5",
-    "/main.35258c7a7349630d.js": "66bcacee0a443aaf126f29b43838eb21153d0f75",
+    "/index.html": "da645943b1ab043fad4200e044a0a39e9786205f",
+    "/main.67e6ddd43bb56940.js": "a9a341b7dfa9408db9ec502403c182829b829edd",
     "/polyfills-core-js.48561d9ece42d4e7.js": "700b1392257b9c17e35bf0987718dd7a1c2c2029",
     "/polyfills-dom.3a5e3168052f1fc5.js": "50f6ff473a0568bffb8a9d412d7efaced2d36137",
     "/polyfills.6ad04e9c01e72dc3.js": "82913ae3457c90a74c607de66e911b458a868c98",
-    "/runtime.a7ee6e22e1ccb2a2.js": "127e9fa2bdf9001b730f395fc02b980f98c11984",
+    "/runtime.172ae897049b8ca8.js": "5e72d37c5819a5915b663441755399201e045983",
     "/styles.22ce46f013c51b7f.css": "6bdb59b5fb6bb2687d7f0c04c6d7cab3872565b2"
   },
   "navigationUrls": [
